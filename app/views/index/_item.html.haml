@@ -1,0 +1,22 @@
+- if item
+  - if item.eql? @selection
+    %tr.item.selected
+      %td.removecell
+        %span.remove
+          %img{ :src => "/images/minus.png", :alt => "-" }
+      %td.inputcell
+        = text_field_tag "list[]", item, :class => "selected"
+  - else
+    %tr.item
+      %td.removecell
+        %span.remove
+          %img{ :src => "/images/minus.png", :alt => "-" }
+      %td.inputcell
+        = text_field_tag "list[]", item
+- else
+  %tr.item
+    %td.removecell
+      %span.remove
+        %img{ :src => "/images/minus.png", :alt => "-" }
+    %td.inputcell
+      = text_field_tag "list[]"

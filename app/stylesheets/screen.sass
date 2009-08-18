@@ -1,0 +1,96 @@
+// This import applies a global reset to any page that imports this stylesheet.
+@import blueprint/reset.sass
+// To configure blueprint, edit the partials/base.sass file.
+@import partials/base.sass
+// Import all the default blueprint modules so that we can access their mixins.
+@import blueprint
+// Import the non-default scaffolding module.
+@import blueprint/modules/scaffolding.sass
+
+// To generate css equivalent to the blueprint css but with your configuration applied, uncomment:
+// +blueprint
+
+//Recommended Blueprint configuration with scoping and semantic layout:
+body.bp
+  +blueprint-typography
+  +blueprint-utilities
+  +blueprint-debug
+  +blueprint-interaction
+  // Remove the scaffolding when you're ready to start doing visual design.
+  // Or leave it in if you're happy with how blueprint looks out-of-the-box
+  //+blueprint-scaffolding
+  !content_columns = ceil(!blueprint_grid_columns / 2)
+  // true means it's the last column in the row
+  +column(!content_columns, true)
+  :margin 5px
+  a
+    :cursor pointer
+    :text-decoration none
+    :font
+      :weight bold
+      :size 2em
+      :style normal
+    :color blue
+    &:visited
+      :color blue
+      &:hover
+        :color red
+    &:hover
+      :color red
+form
+  +blueprint-form
+  body.bp & thead th
+    :background none
+  body.bp & thead tr:hover
+    :background none
+  input
+    :font
+      :size 1.5em
+    :border
+      :size 2px
+      :color #aaa
+      :style solid
+  .submitcell
+    :text-align right
+    input
+      :border none
+  tr
+    &:hover
+      :background #fff8c6
+      input
+        :background #fff8c6
+    &.selected
+      :background #c3d9ff
+      input
+        :background #c3d9ff
+      &:hover
+        :background #fff8c6
+        input
+          :background #fff8c6
+  .removecell
+    :width 1em
+    span
+      :cursor pointer
+      :font
+        :weight bold
+        :size 2em
+      :color blue
+      &:hover
+        :color red
+
+// Page layout can be done using mixins applied to your semantic classes and IDs:
+body.three-col
+  #container
+    +container
+  #header, #footer
+    +column(!blueprint_grid_columns)
+  #sidebar
+    // One third of the grid columns, rounding down. With 24 cols, this is 8.
+    !sidebar_columns = floor(!blueprint_grid_columns / 4)
+    +column(!sidebar_columns)
+  #content
+    // Two thirds of the grid columns, rounding up.
+    // With 24 cols, this is 16.
+    !content_columns = ceil(2 * !blueprint_grid_columns / 4)
+    // true means it's the last column in the row
+    +column(!content_columns, true)
